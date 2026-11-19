@@ -118,8 +118,8 @@ def transaction_to_currency(processed_file: Any, currency: tuple = ("USD", "EUR"
 
     return result
 
-
-def stock_is_SP500(exchange: str ='US') -> list:
+@get_transaction(get_path=lambda: "none")
+def stock_is_SP500(processed_file: Any, exchange: str ='US') -> list:
     stock = []
     if not CACHE:
         try:
