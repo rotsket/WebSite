@@ -26,22 +26,29 @@ def length_check_card_number(correct_card_number: str) -> None:
 
         raise ValueError("Введен некорректный номер карты")
 
-
-def get_mask_account(card_number: Union[int, str]) -> str:
-    """Оставляет последние 4 цифры: **XXXX."""
-
-    correct_card_number = re.sub(
-        r"[a-zA-Zа-яА-Я]", "", str(card_number).replace(" ", "")
-    )
-    length_check_card_number(correct_card_number)
-
-    last_four = correct_card_number[-4:]
-    return json.dumps(f"**{last_four}")
-
 def transactions(path):
     src.tools.path = path
     transaction = financier_operation()
     return transaction
+
+def get_mask_account(path: Any = "../data/operations.csv") -> list[str]:
+    """Оставляет последние 4 цифры: **XXXX."""
+
+    file = transactions(path)
+
+    dictionary_card = ["Номер карты", "номер карты"]
+
+    found_card_number = []
+    for item in file:
+        for key, value in item.items():
+            if key in dictionary_card and str(value).lower() != "nan":
+                found_card_number.append(str(value))
+
+    return found_card_number
+
+    # last_four = found_card_number[-4:]
+    # return json.dumps(f"**{last_four}")
+
 
 def total_сount_сashback(path: Any = "../data/operations.csv") -> dict[str, Any]:
     """ Выводит общую сумму расходов и кешбек"""
@@ -119,5 +126,5 @@ def leaders_transaction(path: Any = "../data/operations.csv", quantity: int = 5)
 #     print(result1)
 
 if __name__ == "__main__":
-    result1 = leaders_transaction("../data/Operations Sun Nov 01 2026-Wed Nov 18 2026.csv")
+    result1 = get_mask_account("../data/Operations Sun Nov 01 2026-Wed Nov 18 2026.csv")
     pprint(result1, indent=1)
