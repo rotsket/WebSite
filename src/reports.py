@@ -2,7 +2,7 @@ import functools
 import re
 
 
-def roports():
+def reports():
     def my_decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):

@@ -34,16 +34,16 @@ def length_check_card_number(correct_card_number: str) -> None:
         raise ValueError("Введен некорректный номер карты")
 
 
-def get_mask_account(card_number: Union[int, str]) -> str:
-    """Оставляет последние 4 цифры: **XXXX."""
-
-    correct_card_number = re.sub(
-        r"[a-zA-Zа-яА-Я]", "", str(card_number).replace(" ", "")
-    )
-    length_check_card_number(correct_card_number)
-
-    last_four = correct_card_number[-4:]
-    return json.dumps(f"**{last_four}")
+# def get_mask_account(card_number: Union[int, str]) -> str:
+#     """Оставляет последние 4 цифры: **XXXX."""
+#
+#     correct_card_number = re.sub(
+#         r"[a-zA-Zа-яА-Я]", "", str(card_number).replace(" ", "")
+#     )
+#     length_check_card_number(correct_card_number)
+#
+#     last_four = correct_card_number[-4:]
+#     return json.dumps(f"**{last_four}")
 
 
 
